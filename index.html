@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trizz</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khmer&display=swap" rel="stylesheet"> 
     <style>
+        @font-face {
+            font-family: 'Khmer OS Moul Light';
+            src: url('path/to/KhmerOSMoulLight.ttf') format('truetype'); /* Replace with actual font file path */
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-			font-family: 'Khmer OS Moul Light', 'Khmer', sans-serif; /* Use Khmer OS Moul Light, fallback to Khmer, then sans-serif */
+            font-family: 'Khmer OS Moul Light', 'Khmer', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3fdfd8c5-0b8c-45a7-a8aa-ebc7752ae9b8/de1q569-7607c74d-8ec7-4d01-979b-eda2dc1722d1.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNmZGZkOGM1LTBiOGMtNDVhNy1hOGFhLWViYzc3NTJhZTliOFwvZGUxcTU2OS03NjA3Yzc0ZC04ZWM3LTRkMDEtOTc5Yi1lZGEyZGMxNzIyZDEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.4PvYNn2swVxNgw0W32h18m2a7Z7IBhu3f4WJ8maeR-E'); /* Replace with your image URL */
+            background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3fdfd8c5-0b8c-45a7-a8aa-ebc7752ae9b8/de1q569-7607c74d-8ec7-4d01-979b-eda2dc1722d1.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNmZGZkOGM1LTBiOGMtNDVhNy1hOGFhLWViYzc3NTJhZTliOFwvZGUxcTU2OS03NjA3Yzc0ZC04ZWM3LTRkMDEtOTc5Yi1lZGEyZGMxNzIyZDEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.4PvYNn2swVxNgw0W32h18m2a7Z7IBhu3f4WJ8maeR-E');
             background-size: cover;
             background-position: center;
-            color: #fff; /* White text for contrast */
+            color: #fff;
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 40px;
             border-radius: 20px;
             text-align: center;
@@ -34,11 +42,55 @@
             border: 3px solid #fff;
         }
 
+        /* Animation for the <h1> */
+        .profile h1 {
+            animation: glow 2s ease-in-out infinite alternate; /* Apply the glow animation */
+        }
+
+        @keyframes glow { /* Define the glow animation */
+            0% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff; /* Brighter glow */
+            }
+            100% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff; /* Dimmer glow */
+            }
+        }
+
+        /* Target specific buttons for animation */
+        .links a[href*="facebook.com"],
+        .links a[href*="instagram.com"],
+        .links a[href*="t.me"] {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .links a[href*="facebook.com"]::after,
+        .links a[href*="instagram.com"]::after,
+        .links a[href*="t.me"]::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('flame.gif'); 
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+
+        .links a[href*="facebook.com"]:hover::after,
+        .links a[href*="instagram.com"]:hover::after,
+        .links a[href*="t.me"]:hover::after {
+            opacity: 1;
+        }
+
         .links a {
             display: inline-block;
             padding: 12px 25px;
             background-color: #fff;
-            color: #333; /* Darker text for contrast on white buttons */
+            color: #333;
             text-decoration: none;
             border-radius: 30px;
             margin: 0 10px 15px;
@@ -61,8 +113,8 @@
     <div class="container">
         <div class="profile">
             <img src="https://scontent.fpnh11-1.fna.fbcdn.net/v/t39.30808-6/452629792_1590576248155734_8679782851128952851_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFgXyyJmrixuJvftyb-0agXvVK_Xzz3HAq9Ur9fPPccChB8SJu_Nh0ZzJCDgMCcT64XknsZzO9ge7ll99TawXQo&_nc_ohc=V9gSr-7NAtAQ7kNvgGC6fEo&_nc_ht=scontent.fpnh11-1.fna&_nc_gid=A5dJdjMK4_-z3D1k75UFTL2&oh=00_AYCF3YFkQ5tsR_BXzQTv4wDUI-fIsfSAUwikCgnqLXkE9Q&oe=66E06ED0" alt="Your Profile Image">
-            <h1>PO SAM NANG</h1>
-            <p​>ពារ រំងាប់​ ដោយការ ចងពារ</p>
+            <h1>PO SAM NANG</h1> 
+            <p>ពារ រំងាប់​ ដោយការ ចងពារ</p>
         </div>
         <div class="links">
             <a href="https://www.facebook.com/Trizz00" target="_blank">Facebook</a>
