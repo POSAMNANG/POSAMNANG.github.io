@@ -86,3 +86,31 @@ header {
 }
 
 /* Add more styles for other sections (work, contact, footer) as needed */
+/* ... other styles ... */
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+    .container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    header .header-content {
+        flex-direction: column; /* Stack image and text vertically */
+        text-align: center; /* Center align text */
+    }
+
+    .profile-image {
+        margin: 0 auto 20px; /* Center the image and add bottom margin */
+    }
+
+    #about .container {
+        flex-direction: column; /* Stack about sections vertically */
+    }
+
+    .about-content {
+        padding-right: 0; /* Remove right padding */
+        margin-bottom: 20px; /* Add bottom margin between sections */
+    }
+
+    /* Add more media queries and styles as needed for other sections and elements */
+}
