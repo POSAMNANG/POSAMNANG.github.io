@@ -59,14 +59,16 @@
         /* Target specific buttons for animation */
         .links a[href*="facebook.com"],
         .links a[href*="instagram.com"],
-        .links a[href*="t.me"] {
+        .links a[href*="t.me"],
+        .links a[href*="linkedin.com"]{
             position: relative;
             overflow: hidden;
         }
 
         .links a[href*="facebook.com"]::after,
         .links a[href*="instagram.com"]::after,
-        .links a[href*="t.me"]::after {
+        .links a[href*="t.me"]::after,
+        .links a[href*="linkedin.com"]::after{
             content: '';
             position: absolute;
             top: 0;
@@ -82,7 +84,8 @@
 
         .links a[href*="facebook.com"]:hover::after,
         .links a[href*="instagram.com"]:hover::after,
-        .links a[href*="t.me"]:hover::after {
+        .links a[href*="t.me"]:hover::after,
+        .links a[href*="linkedin.com"]:hover::after{
             opacity: 1;
         }
 
