@@ -22,15 +22,15 @@ header {
 }
 
 .header-content {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically align items to the center */
+    display: flex; 
+    align-items: flex-start; /* Align items to the top */
 }
 
 .profile-image {
-    width: 250px; /* Adjust the width as needed */
-    height: 250px; /* Adjust the height as needed */
+    width: 100px; 
+    height: 100px; 
     border-radius: 50%;
-    margin-right: 20px; /* Add some space between the image and text */
+    margin-right: 20px; 
 }
 
 .intro {
@@ -89,28 +89,18 @@ header {
 /* ... other styles ... */
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) { /* Adjust breakpoint as needed */
-    .container {
-        padding: 10px; /* Reduce padding on smaller screens */
-    }
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) { 
+    /* ... other media query styles ... */
 
     header .header-content {
-        flex-direction: column; /* Stack image and text vertically */
-        text-align: center; /* Center align text */
+        flex-direction: column; 
+        text-align: center; 
     }
 
     .profile-image {
-        margin: 0 auto 20px; /* Center the image and add bottom margin */
+        margin: 0 auto 20px; 
     }
 
-    #about .container {
-        flex-direction: column; /* Stack about sections vertically */
-    }
-
-    .about-content {
-        padding-right: 0; /* Remove right padding */
-        margin-bottom: 20px; /* Add bottom margin between sections */
-    }
-
-    /* Add more media queries and styles as needed for other sections and elements */
+    /* ... other media query styles ... */
 }
