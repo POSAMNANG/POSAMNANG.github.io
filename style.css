@@ -1,106 +1,267 @@
-/* Basic Styling */
-body {
-    font-family: sans-serif; /* Choose a suitable font */
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: #333;
-}
+<body>
+  <div class="bg-anim" aria-hidden="true"></div>
 
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-}
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner wrap">
+      <div class="brand">
+        <div class="logo">PO</div>
+        <span>IT Portfolio</span>
+      </div>
 
-/* Header Styling */
-/* ... other styles ... */
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
 
-/* Header Styling */
-header {
-    /* ... other header styles ... */
-}
+      <div class="controls">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+        <button id="menuToggle" class="icon-btn only-mobile" aria-label="Menu">☰</button>
+      </div>
+    </div>
 
-.header-content {
-    display: flex; 
-    align-items: flex-start; /* Align items to the top */
-}
+    <div class="mobile-menu wrap" id="mobileMenu">
+      <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
-.profile-image {
-    width: 200px; 
-    height: 200px; 
-    border-radius: 50%;
-    margin-right: 20px; 
-}
+  <!-- HERO -->
+  <header id="home" class="wrap">
+    <section class="hero">
+      <div class="reveal">
+        <span class="eyebrow">Modern • Digital • Secure</span>
+        <h1 class="headline-gradient">Engineering sleek, secure, and scalable IT solutions.</h1>
+        <p class="lead">I design, automate, and harden systems with a methodical, results‑driven mindset. From infrastructure and networking to scripting and support, I turn complexity into clarity.</p>
+        <div class="cta-row">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn" href="#contact" style="background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff;">Contact Me</a>
+        </div>
+      </div>
 
-.intro {
-    /* ... other intro styles ... */
-}
+      <div class="hero-card reveal" aria-label="Quick stats">
+        <div class="mono meta">Status • Available for freelance and full‑time</div>
+        <div class="mini-kpis">
+          <div class="kpi">
+            <strong>99.9%</strong>
+            <span>Uptime Target</span>
+          </div>
+          <div class="kpi">
+            <strong>35%</strong>
+            <span>Downtime Reduction</span>
+          </div>
+          <div class="kpi">
+            <strong>+12</strong>
+            <span>Key Projects</span>
+          </div>
+        </div>
+        <div class="badges">
+          <span class="badge">Windows • Linux</span>
+          <span class="badge">Networking • DNS • VPN</span>
+          <span class="badge">PowerShell • Python</span>
+          <span class="badge">M365 • Security</span>
+        </div>
+      </div>
+    </section>
+  </header>
 
-/* ... other styles ... */
-header {
-    background-color: #f0f0f0; /* Or use an image background */
-    text-align: center;
-    padding: 60px 0;
-}
+  <!-- SKILLS -->
+  <main>
+    <section id="skills" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Capabilities</span>
+        <h2>Technical Skills</h2>
+      </div>
 
-.highlight {
-    color: #3498db; /* Or your preferred highlight color */
-    font-weight: bold;
-}
+      <div class="skills-grid">
+        <article class="skill-card reveal">
+          <div class="skill-title">Infrastructure</div>
+          <div class="meta">Windows Server, Linux admin, virtualization, backups, monitoring.</div>
+          <div class="badges">
+            <span class="badge">AD • GPO</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Hyper‑V</span>
+            <span class="badge">Prometheus</span>
+          </div>
+        </article>
 
-.cta-buttons {
-    margin-top: 30px;
-}
+        <article class="skill-card reveal">
+          <div class="skill-title">Networking</div>
+          <div class="meta">Design, segmentation, and secure remote access.</div>
+          <div class="badges">
+            <span class="badge">TCP/IP</span>
+            <span class="badge">DNS • DHCP</span>
+            <span class="badge">VPN • WireGuard</span>
+            <span class="badge">Firewall</span>
+          </div>
+        </article>
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 0 10px;
-}
+        <article class="skill-card reveal">
+          <div class="skill-title">Security</div>
+          <div class="meta">Hardening, patching, identity, and endpoint protection.</div>
+          <div class="badges">
+            <span class="badge">MFA • SSO</span>
+            <span class="badge">SIEM</span>
+            <span class="badge">Vuln Scans</span>
+            <span class="badge">EDR</span>
+          </div>
+        </article>
 
-/* About Section Styling */
-#about {
-    display: flex; /* Use flexbox for layout */
-    align-items: center;
-    justify-content: space-around;
-}
+        <article class="skill-card reveal">
+          <div class="skill-title">Automation</div>
+          <div class="meta">Scripting, repeatability, and error reduction.</div>
+          <div class="badges">
+            <span class="badge">PowerShell</span>
+            <span class="badge">Python</span>
+            <span class="badge">CLI</span>
+            <span class="badge">API</span>
+          </div>
+        </article>
 
-.about-content {
-    flex: 2; /* Adjust flex values for desired proportions */
-    padding-right: 30px;
-}
+        <article class="skill-card reveal">
+          <div class="skill-title">Productivity</div>
+          <div class="meta">Admin, governance, and collaboration tools.</div>
+          <div class="badges">
+            <span class="badge">Microsoft 365</span>
+            <span class="badge">SharePoint</span>
+            <span class="badge">Intune</span>
+            <span class="badge">Teams</span>
+          </div>
+        </article>
 
-.profile-image {
-    flex: 1;
-}
+        <article class="skill-card reveal">
+          <div class="skill-title">Creative & Docs</div>
+          <div class="meta">Visual clarity for runbooks and reports.</div>
+          <div class="badges">
+            <span class="badge">Markdown</span>
+            <span class="badge">Diagrams</span>
+            <span class="badge">Color Grading</span>
+            <span class="badge">Screenshots</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-.profile-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 50%; /* Make the image circular */
-}
+    <!-- PROJECTS -->
+    <section id="projects" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Case Studies</span>
+        <h2>Highlighted Projects</h2>
+      </div>
 
-/* Add more styles for other sections (work, contact, footer) as needed */
-/* ... other styles ... */
+      <div class="cards">
+        <article class="card reveal">
+          <div class="chip"><span>Automation</span><span class="mono">PowerShell</span></div>
+          <h3>Zero‑Touch Onboarding</h3>
+          <p class="meta">Built a PowerShell workflow to provision users, license M365, set mailbox rules, and enroll devices. Reduced onboarding time from 2h to 12m and eliminated manual errors.</p>
+          <div class="badges">
+            <span class="badge">Graph API</span>
+            <span class="badge">Intune</span>
+            <span class="badge">Azure AD</span>
+          </div>
+        </article>
 
-/* Media Queries for Responsiveness */
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) { 
-    /* ... other media query styles ... */
+        <article class="card reveal">
+          <div class="chip"><span>Networking</span><span class="mono">WireGuard</span></div>
+          <h3>Secure Remote Access</h3>
+          <p class="meta">Deployed site‑to‑site and client VPN with least‑privilege rules and MFA. Achieved 30% latency improvement and cut helpdesk tickets by 40%.</p>
+          <div class="badges">
+            <span class="badge">Firewall</span>
+            <span class="badge">MFA</span>
+            <span class="badge">Monitoring</span>
+          </div>
+        </article>
 
-    header .header-content {
-        flex-direction: column; 
-        text-align: center; 
-    }
+        <article class="card reveal">
+          <div class="chip"><span>Security</span><span class="mono">Hardening</span></div>
+          <h3>Endpoint Baselines</h3>
+          <p class="meta">Standardized CIS‑aligned baselines for Windows 11 and Server 2022. Cut vuln scan findings by 62% within one quarter.</p>
+          <div class="badges">
+            <span class="badge">GPO</span>
+            <span class="badge">EDR</span>
+            <span class="badge">Patch Mgmt</span>
+          </div>
+        </article>
 
-    .profile-image {
-        margin: 0 auto 20px; 
-    }
+        <article class="card reveal">
+          <div class="chip"><span>Observability</span><span class="mono">Prometheus</span></div>
+          <h3>Proactive Monitoring</h3>
+          <p class="meta">Implemented metrics and alerting for core services with runbook links. Mean time to resolution improved by 45%.</p>
+          <div class="badges">
+            <span class="badge">Grafana</span>
+            <span class="badge">Alerting</span>
+            <span class="badge">Dashboards</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-    /* ... other media query styles ... */
-}
+    <!-- ABOUT -->
+    <section id="about" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Profile</span>
+        <h2>About Me</h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal" style="grid-column: span 12;">
+          <p class="lead">Detail‑oriented IT specialist blending systems thinking with design sense. I decode complex requirements, automate the boring, and leave behind clean docs and resilient systems. I care about uptime, security, and experiences that feel effortless.</p>
+          <div class="badges">
+            <span class="badge">Based in Phnom Penh</span>
+            <span class="badge">Available Remote</span>
+            <span class="badge">English • Khmer</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Let’s talk</span>
+        <h2>Contact</h2>
+      </div>
+
+      <div class="contact">
+        <form class="reveal" onsubmit="event.preventDefault(); alert('Thanks! I will get back to you shortly.'); this.reset();">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="msg">Message</label>
+            <textarea id="msg" name="message" placeholder="How can I help?" required></textarea>
+          </div>
+          <button class="btn" type="submit">Send Message</button>
+        </form>
+
+        <div class="hero-card reveal">
+          <div class="mono meta">Direct</div>
+          <p class="lead">Prefer email or socials? I’m flexible.</p>
+          <div class="badges">
+            <a class="badge" href="mailto:you@domain.com">you@domain.com</a>
+            <a class="badge" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="badge" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="badge" href="#" target="_blank" rel="noopener">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div>© <span id="year"></span> PO • Built with clean HTML/CSS/JS</div>
+      <div class="mono">Theme: <span id="themeLabel">Dark</span></div>
+    </div>
+  </footer>
+
