@@ -1,37 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Professional IT portfolio of Po Samnang — showcasing skills, projects, and expertise.">
-  <title>Po Samnang | IT Portfolio</title>
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IT • PO SAM NANG</title>
+  <meta name="description" content="Modern, digital IT portfolio showcasing skills, projects, and contact." />
+
+  <!-- Optional: Google Fonts (safe to remove if you prefer system fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-elev: #111833;
+      --text: #e8eeff;
+      --muted: #a8b0c7;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --accent: #39d0ff;
+      --accent-2: #8a5cff;
+      --glow: 0 0 24px rgba(57,208,255,0.35);
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --maxw: 1100px;
+      --pad: clamp(16px, 2vw, 28px);
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    /* Light theme */
+    [data-theme="light"] {
+      --bg: #f5f7fb;
+      --bg-elev: #ffffff;
+      --text: #0d1321;
+      --muted: #4d5875;
+      --card: rgba(10,20,30,0.04);
+      --border: rgba(10,20,30,0.08);
+      --accent: #0066ff;
+      --accent-2: #7a38ff;
+      --glow: 0 0 24px rgba(0,102,255,0.25);
+      --shadow: 0 10px 30px rgba(0,10,20,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: radial-gradient(1200px 1200px at 80% -10%, rgba(57,208,255,0.08), transparent 40%),
+                  radial-gradient(1000px 800px at -10% 110%, rgba(138,92,255,0.10), transparent 50%),
+                  var(--bg);
+      line-height: 1.65;
+      scroll-behavior: smooth;
+    }
+
+    /* Animated subtle gradient overlay */
+    .bg-anim {
+      position: fixed; inset: -10% -10% auto -10%;
+      height: 60vh;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(57,208,255,0.12), rgba(138,92,255,0.12), rgba(57,208,255,0.12));
+      filter: blur(80px) saturate(130%);
+      opacity: 0.35;
+      animation: spin 24s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes spin { to { transform: rotate(1turn); } }
+
+    /* Container */
+    .wrap { width: min(100% - 2*var(--pad), var(--maxw)); margin-inline: auto; position: relative; z-index: 2; }
+
+    /* Navbar */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(10,15,30,0.65), rgba(10,15,30,0.35));
+      border-bottom: 1px solid var(--border);
+    }
+    [data-theme="light"] .nav {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px var(--pad);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.3px;
+    }
+    .brand .logo {
+      width: 28px; height: 28px; display: grid; place-items: center;
+      border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: var(--glow);
+      color: #fff; font-family: var(--mono); font-size: 14px;
+    }
+    .nav-links {
+      display: flex; gap: 18px; align-items: center;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active::after, .nav-links a:hover::after {
+      content: ""; position: absolute; left: 10px; right: 10px; bottom: 2px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 2px;
+    }
+    .controls { display: flex; align-items: center; gap: 8px; }
+
+    .btn, .icon-btn {
+      cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text);
+      padding: 10px 14px; border-radius: 10px; font-weight: 600;
+      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover, .icon-btn:hover { transform: translateY(-1px); box-shadow: var(--glow), var(--shadow); border-color: transparent; }
+    .icon-btn { padding: 8px 10px; display: grid; place-items: center; }
+    .only-mobile { display: none; }
+
+    @media (max-width: 880px) {
+      .nav-links { display: none; }
+      .only-mobile { display: inline-grid; }
+      .mobile-menu {
+        display: none; position: fixed; top: 54px; right: var(--pad); left: var(--pad);
+        background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); z-index: 40;
+        box-shadow: var(--shadow);
+      }
+      .mobile-menu.open { display: block; }
+      .mobile-menu a { display: block; padding: 14px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+      .mobile-menu a:last-child { border-bottom: 0; }
+    }
+
+    /* Sections */
+    section { padding: clamp(48px, 8vw, 120px) 0; }
+    .section-head {
+      display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 24px;
+    }
+    .eyebrow {
+      display: inline-flex; gap: 8px; align-items: center; padding: 6px 10px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--card); color: var(--muted); font-weight: 700; font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.2; }
+    h1 { font-size: clamp(28px, 6vw, 56px); }
+    h2 { font-size: clamp(22px, 4vw, 36px); }
+    p.lead { color: var(--muted); font-size: clamp(14px, 2.2vw, 18px); max-width: 70ch; }
+
+    /* Hero */
+    .hero {
+      display: grid; gap: 28px; align-items: center;
+      grid-template-columns: 1.2fr 1fr;
+    }
+    @media (max-width: 980px) { .hero { grid-template-columns: 1fr; } }
+
+    .headline-gradient {
+      background: linear-gradient(90deg, var(--text), var(--accent) 55%, var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 6px 18px rgba(57,208,255,0.15));
+    }
+    .hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-card {
+      border: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-radius: var(--radius); padding: 18px; display: grid; gap: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(6px);
+    }
+    .mini-kpis {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .kpi { border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 12px; text-align: center; }
+    .kpi strong { display: block; font-size: 18px; }
+    .kpi span { color: var(--muted); font-size: 12px; }
+
+    /* Skills */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;
+    }
+    .skill-card {
+      grid-column: span 4; min-height: 120px;
+      border: 1px solid var(--border); background: var(--card); border-radius: var(--radius); padding: 18px; display: grid; gap: 10px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: var(--glow), var(--shadow); border-color: transparent; }
+    .skill-title { font-weight: 800; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      font-family: var(--mono); font-size: 12px; padding: 6px 10px; border-radius: 999px; color: var(--text);
+      background: linear-gradient(90deg, rgba(57,208,255,0.24), rgba(138,92,255,0.24));
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 900px) { .skill-card { grid-column: span 6; } }
+    @media (max-width: 600px) { .skill-card { grid-column: span 12; } }
+
+    /* Projects */
+    .cards {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;
+    }
+    .card {
+      grid-column: span 6;
+      border: 1px solid var(--border); background: var(--card); border-radius: var(--radius); padding: 18px; display: grid; gap: 12px;
+      position: relative; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--glow), var(--shadow); border-color: transparent; }
+    @media (max-width: 900px) { .card { grid-column: span 12; } }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--muted);
+      padding: 6px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--border);
+    }
+    .meta { color: var(--muted); font-size: 14px; }
+    .mono { font-family: var(--mono); }
+
+    /* Contact */
+    .contact {
+      display: grid; gap: 16px; grid-template-columns: 1.2fr 1fr;
+    }
+    @media (max-width: 980px) { .contact { grid-template-columns: 1fr; } }
+    .field { display: grid; gap: 8px; }
+    input, textarea {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--card);
+      color: var(--text); outline: none;
+    }
+    input:focus, textarea:focus { border-color: transparent; box-shadow: var(--glow), var(--shadow); }
+    textarea { min-height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border); background: rgba(0,0,0,0.15);
+      padding: 18px var(--pad); color: var(--muted); font-size: 14px;
+    }
+    [data-theme="light"] footer { background: rgba(255,255,255,0.5); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+  </style>
 </head>
 <body>
-  <div class="bg-anim"></div>
+  <div class="bg-anim" aria-hidden="true"></div>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-content container">
-      <div class="brand">PO</div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner wrap">
+      <div class="brand">
+        <div class="logo">PO</div>
+        <span>IT Portfolio</span>
+      </div>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
+
       <div class="controls">
-        <button id="themeToggle">🌓</button>
-        <button class="menu-toggle" id="menuToggle">☰</button>
+        <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+        <button id="menuToggle" class="icon-btn only-mobile" aria-label="Menu">☰</button>
       </div>
     </div>
-    <div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-menu wrap" id="mobileMenu">
       <a href="#home">Home</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
@@ -40,114 +268,292 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero container">
-    <div class="hero-text reveal">
-      <div class="eyebrow">Modern • Digital • Secure</div>
-      <h1 class="headline-gradient">Po Samnang</h1>
-      <p class="lead">IT Professional specializing in modern solutions for digital businesses.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="button">View Projects</a>
-        <a href="#contact" class="button" style="background:transparent;border:1px solid var(--accent)">Contact Me</a>
+  <!-- HERO -->
+  <header id="home" class="wrap">
+    <section class="hero">
+      <div class="reveal">
+        <span class="eyebrow">Modern • Digital • Secure</span>
+        <h1 class="headline-gradient">Engineering sleek, secure, and scalable IT solutions.</h1>
+        <p class="lead">I design, automate, and harden systems with a methodical, results‑driven mindset. From infrastructure and networking to scripting and support, I turn complexity into clarity.</p>
+        <div class="cta-row">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn" href="#contact" style="background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff;">Contact Me</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-stats reveal">
-      <div class="card">
-        <h3>Availability</h3>
-        <p>Open to full-time or contract projects</p>
+
+      <div class="hero-card reveal" aria-label="Quick stats">
+        <div class="mono meta">Status • Available for freelance and full‑time</div>
         <div class="mini-kpis">
-          <div>
-            <div class="value">10+</div>
-            <div class="label">Projects</div>
+          <div class="kpi">
+            <strong>99.9%</strong>
+            <span>Uptime Target</span>
           </div>
-          <div>
-            <div class="value">5+</div>
-            <div class="label">Years Exp.</div>
+          <div class="kpi">
+            <strong>35%</strong>
+            <span>Downtime Reduction</span>
+          </div>
+          <div class="kpi">
+            <strong>+12</strong>
+            <span>Key Projects</span>
           </div>
         </div>
         <div class="badges">
-          <span class="badge">Remote</span>
-          <span class="badge">Cloud</span>
-          <span class="badge">Security</span>
+          <span class="badge">Windows • Linux</span>
+          <span class="badge">Networking • DNS • VPN</span>
+          <span class="badge">PowerShell • Python</span>
+          <span class="badge">M365 • Security</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </header>
 
-  <!-- Skills -->
-  <section id="skills" class="section container">
-    <h2 class="section-title">Core Skills</h2>
-    <div class="grid-3">
-      <div class="card reveal">
-        <h3>Networking</h3>
-        <p>Configuring secure networks, VPNs, and firewalls for modern businesses.</p>
-        <div class="badges"><span class="badge">Cisco</span> <span class="badge">MikroTik</span></div>
+  <!-- SKILLS -->
+  <main>
+    <section id="skills" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Capabilities</span>
+        <h2>Technical Skills</h2>
       </div>
-      <div class="card reveal">
-        <h3>Cloud & Servers</h3>
-        <p>Deploying and managing scalable cloud infrastructure with automation.</p>
-        <div class="badges"><span class="badge">AWS</span> <span class="badge">Linux</span> <span class="badge">Docker</span></div>
-      </div>
-      <div class="card reveal">
-        <h3>Development</h3>
-        <p>Building secure and modern web applications & digital solutions.</p>
-        <div class="badges"><span class="badge">JavaScript</span> <span class="badge">HTML/CSS</span></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Projects -->
-  <section id="projects" class="section container">
-    <h2 class="section-title">Highlighted Projects</h2>
-    <div class="grid-2">
-      <div class="card reveal">
-        <h3>Cloud Migration</h3>
-        <p>Migrated legacy systems to cloud platforms improving reliability & cutting costs by 30%.</p>
-      </div>
-      <div class="card reveal">
-        <h3>Secure E-Commerce Platform</h3>
-        <p>Built scalable, secure online store supporting 10k+ users/day with robust encryption.</p>
-      </div>
-    </div>
-  </section>
+      <div class="skills-grid">
+        <article class="skill-card reveal">
+          <div class="skill-title">Infrastructure</div>
+          <div class="meta">Windows Server, Linux admin, virtualization, backups, monitoring.</div>
+          <div class="badges">
+            <span class="badge">AD • GPO</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Hyper‑V</span>
+            <span class="badge">Prometheus</span>
+          </div>
+        </article>
 
-  <!-- About -->
-  <section id="about" class="section container">
-    <h2 class="section-title">About Me</h2>
-    <div class="card reveal">
-      <p>I'm <strong>Po Samnang</strong>, an IT professional passionate about building secure, scalable systems that empower businesses to grow in the digital age.</p>
-      <div class="badges">
-        <span class="badge">Phnom Penh</span>
-        <span class="badge">Remote Ready</span>
-        <span class="badge">English / Khmer</span>
+        <article class="skill-card reveal">
+          <div class="skill-title">Networking</div>
+          <div class="meta">Design, segmentation, and secure remote access.</div>
+          <div class="badges">
+            <span class="badge">TCP/IP</span>
+            <span class="badge">DNS • DHCP</span>
+            <span class="badge">VPN • WireGuard</span>
+            <span class="badge">Firewall</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal">
+          <div class="skill-title">Security</div>
+          <div class="meta">Hardening, patching, identity, and endpoint protection.</div>
+          <div class="badges">
+            <span class="badge">MFA • SSO</span>
+            <span class="badge">SIEM</span>
+            <span class="badge">Vuln Scans</span>
+            <span class="badge">EDR</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal">
+          <div class="skill-title">Automation</div>
+          <div class="meta">Scripting, repeatability, and error reduction.</div>
+          <div class="badges">
+            <span class="badge">PowerShell</span>
+            <span class="badge">Python</span>
+            <span class="badge">CLI</span>
+            <span class="badge">API</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal">
+          <div class="skill-title">Productivity</div>
+          <div class="meta">Admin, governance, and collaboration tools.</div>
+          <div class="badges">
+            <span class="badge">Microsoft 365</span>
+            <span class="badge">SharePoint</span>
+            <span class="badge">Intune</span>
+            <span class="badge">Teams</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal">
+          <div class="skill-title">Creative & Docs</div>
+          <div class="meta">Visual clarity for runbooks and reports.</div>
+          <div class="badges">
+            <span class="badge">Markdown</span>
+            <span class="badge">Diagrams</span>
+            <span class="badge">Color Grading</span>
+            <span class="badge">Screenshots</span>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section container">
-    <h2 class="section-title">Get in Touch</h2>
-    <form onsubmit="event.preventDefault(); alert('Message sent! (demo)')" class="reveal">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <div style="margin-top:2rem;text-align:center;">
-      <a href="mailto:you@example.com" class="badge">Email</a>
-      <a href="https://linkedin.com" class="badge">LinkedIn</a>
-      <a href="https://github.com" class="badge">GitHub</a>
-      <a href="https://twitter.com" class="badge">Twitter</a>
-    </div>
-  </section>
+    <!-- PROJECTS -->
+    <section id="projects" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Case Studies</span>
+        <h2>Highlighted Projects</h2>
+      </div>
 
-  <!-- Footer -->
+      <div class="cards">
+        <article class="card reveal">
+          <div class="chip"><span>Automation</span><span class="mono">PowerShell</span></div>
+          <h3>Zero‑Touch Onboarding</h3>
+          <p class="meta">Built a PowerShell workflow to provision users, license M365, set mailbox rules, and enroll devices. Reduced onboarding time from 2h to 12m and eliminated manual errors.</p>
+          <div class="badges">
+            <span class="badge">Graph API</span>
+            <span class="badge">Intune</span>
+            <span class="badge">Azure AD</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="chip"><span>Networking</span><span class="mono">WireGuard</span></div>
+          <h3>Secure Remote Access</h3>
+          <p class="meta">Deployed site‑to‑site and client VPN with least‑privilege rules and MFA. Achieved 30% latency improvement and cut helpdesk tickets by 40%.</p>
+          <div class="badges">
+            <span class="badge">Firewall</span>
+            <span class="badge">MFA</span>
+            <span class="badge">Monitoring</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="chip"><span>Security</span><span class="mono">Hardening</span></div>
+          <h3>Endpoint Baselines</h3>
+          <p class="meta">Standardized CIS‑aligned baselines for Windows 11 and Server 2022. Cut vuln scan findings by 62% within one quarter.</p>
+          <div class="badges">
+            <span class="badge">GPO</span>
+            <span class="badge">EDR</span>
+            <span class="badge">Patch Mgmt</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="chip"><span>Observability</span><span class="mono">Prometheus</span></div>
+          <h3>Proactive Monitoring</h3>
+          <p class="meta">Implemented metrics and alerting for core services with runbook links. Mean time to resolution improved by 45%.</p>
+          <div class="badges">
+            <span class="badge">Grafana</span>
+            <span class="badge">Alerting</span>
+            <span class="badge">Dashboards</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Profile</span>
+        <h2>About Me</h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal" style="grid-column: span 12;">
+          <p class="lead">Detail‑oriented IT specialist blending systems thinking with design sense. I decode complex requirements, automate the boring, and leave behind clean docs and resilient systems. I care about uptime, security, and experiences that feel effortless.</p>
+          <div class="badges">
+            <span class="badge">Based in Phnom Penh</span>
+            <span class="badge">Available Remote</span>
+            <span class="badge">English • Khmer</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Let’s talk</span>
+        <h2>Contact</h2>
+      </div>
+
+      <div class="contact">
+        <form class="reveal" onsubmit="event.preventDefault(); alert('Thanks! I will get back to you shortly.'); this.reset();">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="msg">Message</label>
+            <textarea id="msg" name="message" placeholder="How can I help?" required></textarea>
+          </div>
+          <button class="btn" type="submit">Send Message</button>
+        </form>
+
+        <div class="hero-card reveal">
+          <div class="mono meta">Direct</div>
+          <p class="lead">Prefer email or socials? I’m flexible.</p>
+          <div class="badges">
+            <a class="badge" href="mailto:you@domain.com">you@domain.com</a>
+            <a class="badge" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="badge" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="badge" href="#" target="_blank" rel="noopener">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
-    <p>© <span id="year"></span> Po Samnang. All rights reserved.</p>
-    <p>Theme: <span id="themeLabel">Dark</span></p>
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div>© <span id="year"></span> PO • Built with clean HTML/CSS/JS</div>
+      <div class="mono">Theme: <span id="themeLabel">Dark</span></div>
+    </div>
   </footer>
 
-  <!-- JavaScript -->
-  <script src="script.js"></script>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle with persistence
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    themeLabel.textContent = root.getAttribute('data-theme') === 'light' ? 'Light' : 'Dark';
+    themeToggle.addEventListener('click', () => {
+      const cur = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', cur);
+      localStorage.setItem('theme', cur);
+      themeLabel.textContent = cur === 'light' ? 'Light' : 'Dark';
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Scrollspy for nav
+    const links = Array.from(document.querySelectorAll('.nav-links a, .mobile-menu a'));
+    const map = {};
+    links.forEach(l => { if (l.hash) map[l.hash.slice(1)] = l; });
+
+    const sections = Array.from(document.querySelectorAll('section, header')).filter(s => s.id);
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        if (entry.isIntersecting) {
+          // Clear active
+          document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+          const link = map[id];
+          if (link && link.closest('.nav-links')) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-50% 0px -40% 0px', threshold: 0.01 });
+    sections.forEach(s => spy.observe(s));
+  </script>
 </body>
 </html>
