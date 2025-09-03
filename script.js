@@ -1,66 +1,42 @@
-// Dynamic year
-document.getElementById('year').textContent = new Date().getFullYear();
+(function () {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const printBtn = document.getElementById('printBtn');
+  const backToTop = document.getElementById('backToTop');
+  const year = document.getElementById('year');
 
-// Theme toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeLabel = document.getElementById('themeLabel');
-const root = document.documentElement;
+  // Year
+  if (year) year.textContent = new Date().getFullYear();
 
-function setTheme(theme) {
-  if (theme === 'light') {
-    root.setAttribute('data-theme', 'light');
-    themeLabel.textContent = 'Light';
-  } else {
-    root.removeAttribute('data-theme');
-    themeLabel.textContent = 'Dark';
-  }
-  localStorage.setItem('theme', theme);
-}
+  // Theme: respect saved preference or system
+  const saved = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved || (systemPrefersDark ? 'dark' : 'light');
+  root.setAttribute('data-theme', initial);
+  if (themeToggle) themeToggle.setAttribute('aria-pressed', String(initial === 'dark'));
 
-themeToggle.addEventListener('click', () => {
-  const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  setTheme(current);
-});
-
-// Load saved theme
-setTheme(localStorage.getItem('theme') || 'dark');
-
-// Mobile menu
-const menuToggle = document.getElementById('menuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-
-menuToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
-
-document.querySelectorAll('.mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
-
-// Reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      observer.unobserve(entry.target);
-    }
+  // Toggle theme
+  themeToggle?.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    themeToggle.setAttribute('aria-pressed', String(next === 'dark'));
   });
-}, { threshold: 0.1 });
 
-reveals.forEach(el => observer.observe(el));
-
-// Scrollspy
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('nav a');
-
-const spy = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(link => link.classList.remove('active'));
-      document.querySelector(`nav a[href="#${entry.target.id}"]`).classList.add('active');
-    }
+  // Print to PDF
+  printBtn?.addEventListener('click', () => {
+    window.print();
   });
-}, { threshold: 0.6 });
 
-sections.forEach(section => spy.observe(section));
+  // Back to top
+  window.addEventListener('scroll', () => {
+    const show = window.scrollY > 240;
+    backToTop.style.opacity = show ? '1' : '0';
+    backToTop.style.pointerEvents = show ? 'auto' : 'none';
+  }, { passive: true });
+
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
